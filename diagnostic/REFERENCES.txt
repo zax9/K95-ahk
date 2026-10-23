@@ -1,0 +1,30 @@
+Protocol and API references
+
+1. ckb-next key map and input report handling
+https://github.com/ckb-next/ckb-next/blob/master/src/daemon/keymap.c
+File blob SHA: 423112de4fd05b8d40e03b3c4bd67ab0aea5e24a
+The original NXP input map places G1-G10 at bits 120-129 and G11-G18
+at bits 136-143. Modern NXP input report 03 has a one-byte report ID
+before the key bitfield. The LED positions in the map are different.
+
+2. ckb-next keyboard input-mode setup
+https://github.com/ckb-next/ckb-next/blob/master/src/daemon/device_keyboard.c
+File blob SHA: 4809c0eb368b8f1f26ef636b05d27f6ac508a10d
+This code enables software input and selects Corsair key reporting.
+The diagnostic does not issue these configuration commands.
+
+3. CUE.NET.Input device interface reference
+https://github.com/DarthAffe/CUE.NET.Input/blob/master/CorsairHIDIds.cs
+File blob SHA: 1bca7648180642745e6257308bf2d0429d56b5a4
+Lists K95 RGB: VID 1B1C, PID 1B11, interface 01, collection 03,
+64-byte input reports.
+The user's Windows test showed MI_00 / COL03 instead of MI_01 / COL03.
+Version 0.2 therefore does not restrict the interface number.
+
+4. Windows Raw Input
+https://learn.microsoft.com/en-us/windows/win32/inputdev/about-raw-input
+https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerrawinputdevices
+https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rawhid
+
+Protocol facts were used to write this diagnostic. It does not link to,
+bundle, or run the ckb-next or CUE.NET.Input implementations.

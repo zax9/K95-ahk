@@ -1,0 +1,44 @@
+K95 Diagnostic v0.2 - validation record
+
+Completed
+
+- Compiled the 64-bit Windows GUI executable with MinGW-w64 GCC 13.2.
+  C++17, -O2, -Wall, -Wextra, -Wpedantic, and -Werror.
+  Compilation and linking passed with no warnings.
+- Ran decoder_tests.cpp with AddressSanitizer and UndefinedBehaviorSanitizer
+  on Linux. All tests passed. LeakSanitizer was disabled because this
+  environment does not permit its process inspection.
+- Tested the user's MI_00 / COL03 path and the alternate MI_01 path.
+  Both pass all 18 key samples through the combined path and report gate.
+  Unrelated device IDs, COL04, missing collection IDs, and partial token
+  matches are rejected.
+- Tested the 18 individual G-key bit positions, simultaneous keys,
+  press/release transitions, repeated reports, unrelated bits, invalid
+  lengths and IDs, and HID batch bounds.
+- Matched the 18 input-bit positions against the ckb-next key map.
+- Inspected the executable: PE32+ x86-64 GUI application.
+- Confirmed that high-entropy ASLR, dynamic base, and NX flags are present.
+- Confirmed that imports are limited to Windows system DLLs:
+  ADVAPI32, COMDLG32, GDI32, HID, KERNEL32, MSVCRT, SETUPAPI, USER32.
+  No iCUE SDK DLL, separate .NET runtime, or MinGW runtime DLL is required.
+- Reviewed the program's input filters and device access operations.
+  It opens K95 input streams for reading only. Its only WriteFile call
+  writes a report to a file selected by the user with CREATE_NEW.
+
+Not completed
+
+- Execution on Windows 10 build 19045.
+- Testing with a physical K95 RGB keyboard.
+- Runtime validation of the window layout, report dialog, service scan,
+  device reconnect behavior, HID cancellation, or actual memory use.
+- Verification that iCUE-off firmware state exposes report 03.
+
+A Wine UI test of v0.1 was blocked by local socket restrictions.
+The v0.2 executable has not been run on Windows or Wine. No v0.2 UI
+or Windows runtime result is claimed.
+
+The program is an initial diagnostic. A successful build and decoder test
+do not establish that the keyboard will send the expected reports.
+
+Protocol map source blob:
+423112de4fd05b8d40e03b3c4bd67ab0aea5e24a

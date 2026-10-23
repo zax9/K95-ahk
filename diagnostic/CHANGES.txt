@@ -1,0 +1,29 @@
+Changes in v0.2
+
+Fixed an input-selection error in v0.1.
+
+Version 0.1 opened the user's MI_00 / COL03 HID stream, but its decoder
+accepted only MI_01 / COL03. It therefore could not decode G keys on the
+user's reported layout, even if correct input reports arrived.
+
+Version 0.2 accepts COL03 on any interface number for VID 1B1C / PID 1B11.
+It still requires the expected 64-byte report with report ID 03. Other
+collections and formats are recorded as samples, not decoded as G keys.
+
+The window now shows:
+- The collection selected for G-key decoding.
+- The first two samples for each input method, interface, report ID,
+  and report length.
+- The first two standard keyboard events.
+- Total input counts and counts for each stream when capture stops.
+- Separate messages for no HID reports, unsupported reports, and
+  supported reports without G-key presses.
+
+Added regression tests using the user's MI_00 / COL03 path. The tests
+also cover MI_01, unrelated devices, unrelated collections, and all
+18 G keys through the combined path-selection and packet-decoding code.
+
+The program still does not send configuration commands to the keyboard.
+The user's pasted v0.1 window log does not contain packet samples or input
+counts. It is not enough to determine whether mode initialization is
+required. The full saved report is required if this test still fails.
