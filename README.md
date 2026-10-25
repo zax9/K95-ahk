@@ -156,3 +156,15 @@ The G-key state is a bit mask inside report `03`. Byte offsets below are zero-ba
 The script compares each report with the prior state to find presses and releases. It processes all reports in each Windows input message. It runs the configured actions after the input callback returns.
 
 Protocol references and source revisions are listed in [`diagnostic/REFERENCES.txt`](diagnostic/REFERENCES.txt). The implementation uses the [Windows Raw Input API](https://learn.microsoft.com/en-us/windows/win32/inputdev/about-raw-input) and AutoHotkey v2's [OnMessage](https://www.autohotkey.com/docs/v2/lib/OnMessage.htm) and [DllCall](https://www.autohotkey.com/docs/v2/lib/DllCall.htm) functions.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+Third-party components retain their own licenses. Their notices are in [diagnostic/third_party/](diagnostic/third_party/).
+
+## Disclaimer
+
+The software and documentation are provided "as is", without warranties of any kind, express or implied. This includes warranties of merchantability, fitness for a particular purpose, and noninfringement.
+
+Use this software at your own risk. To the extent permitted by law, the authors and copyright holders are not liable for any claims, damages, or other liability arising from its use. See [LICENSE](LICENSE) for the full terms.
